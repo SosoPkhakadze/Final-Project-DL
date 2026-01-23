@@ -1,63 +1,73 @@
-Visual Storyteller: Image Captioning with CNN-LSTM
+# Visual Storyteller: Image Captioning with CNN-LSTM
+
 Deep Learning Final Project by Soso Pkhakadze, Guga Mepisashvili, and Lile Vakhtangadze
-Overview
+
+## Overview
+
 This project implements an image captioning system that generates natural language descriptions of images. The model combines a Convolutional Neural Network (CNN) encoder with a Long Short-Term Memory (LSTM) decoder to bridge visual and linguistic modalities.
-Architecture
 
-Encoder: ResNet-50 (pretrained, fine-tuned on layer4 and fc)
-Decoder: Single-layer LSTM with embedding layer
-Embedding Size: 256
-Hidden Size: 256
-Vocabulary: Built from training captions (freq_threshold=5)
+## Architecture
 
-Dataset
+- *Encoder*: ResNet-50 (pretrained, fine-tuned on layer4 and fc)
+- *Decoder*: Single-layer LSTM with embedding layer
+- *Embedding Size*: 256
+- *Hidden Size*: 256
+- *Vocabulary*: Built from training captions (freq_threshold=5)
 
-Source: Flickr8k (8,000 images)
-Annotations: 5 captions per image
-Location: caption_data/
+## Dataset
 
-Installation
-bashpip install -r requirements.txt
-Usage
-Training
+- *Source*: Flickr8k (8,000 images)
+- *Annotations*: 5 captions per image
+- *Location*: caption_data/
+
+## Installation
+
+pip install -r requirements.txt
+
+## Usage
+
+### Training
+
 Run data_and_training.ipynb to:
+1. Load and preprocess data
+2. Build vocabulary
+3. Train the model (25 epochs)
+4. Save model weights to best_model.pth
 
-Load and preprocess data
-Build vocabulary
-Train the model (25 epochs)
-Save model weights to best_model.pth
+### Inference
 
-Inference
 Run inference.ipynb to:
+1. Load trained model
+2. Generate captions for test images
+3. Compare generated vs. ground truth captions
 
-Load trained model
-Generate captions for test images
-Compare generated vs. ground truth captions
+*Key Function:*
+generate_caption(model, image_path, transform, vocab, device, max_length=50)
 
-Key Function:
-pythongenerate_caption(model, image_path, transform, vocab, device, max_length=50)
-Training Details
+## Training Details
 
-Optimizer: Adam (lr=3e-4)
-Loss: CrossEntropyLoss (ignoring pad tokens)
-Scheduler: ReduceLROnPlateau
-Gradient Clipping: max_norm=1.0
-Batch Size: 32
+- *Optimizer*: Adam (lr=3e-4)
+- *Loss*: CrossEntropyLoss (ignoring pad tokens)
+- *Scheduler*: ReduceLROnPlateau
+- *Gradient Clipping*: max_norm=1.0
+- *Batch Size*: 32
 
-Results
+## Results
+
 The model successfully generates contextually relevant captions. Examples include accurate descriptions of objects, actions, and settings, though occasional misclassifications occur in complex scenes.
-Files
 
-data_and_training.ipynb - Training pipeline
-inference.ipynb - Caption generation and evaluation
-best_model.pth - Trained model weights
-vocab.pkl - Saved vocabulary object
-requirements.txt - Dependencies
+## Files
 
-Requirements
+- data_and_training.ipynb - Training pipeline
+- inference.ipynb - Caption generation and evaluation
+- best_model.pth - Trained model weights
+- vocab.pkl - Saved vocabulary object
+- requirements.txt - Dependencies
 
-PyTorch
-torchvision
-Pillow
-pandas
-matplotlib
+## Requirements
+
+- PyTorch
+- torchvision
+- Pillow
+- pandas
+- matplotlib
